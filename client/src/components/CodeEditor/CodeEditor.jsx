@@ -1,9 +1,9 @@
 import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import Editor from "@monaco-editor/react";
-import CodeEditorButton from "./Button";
 import MenuDropdown from "../MenuDropdown/MenuDropdown";
 import "./COdeEditor.css";
+import QueryButtons from "../QueryButtons/QueryButtons";
 
 const languageCommentsMap = new Map([
 	["javascript", "// Paste/Enter your code here"],
@@ -64,6 +64,7 @@ export default function CodeEditor({ defaultCode }) {
 		};
 		console.log("Payload:", payload);
 
+		dispatch({ type: "SET_LOADING", payload: true });
 		fetch(url, {
 			method: "POST",
 			headers: {
@@ -86,9 +87,11 @@ export default function CodeEditor({ defaultCode }) {
 						language: "c",
 					},
 				});
+				dispatch({ type: "SET_LOADING", payload: false });
 			})
 			.catch((error) => {
-				console.error("Error:", error);
+				console.error("Error fetching response:", error);
+				dispatch({ type: "SET_LOADING", payload: false });
 			});
 	}
 
@@ -131,7 +134,7 @@ export default function CodeEditor({ defaultCode }) {
 				onValidate={handleEditorValidation}
 			/>
 
-			<CodeEditorButton handleClick={handleGenerate} />
+			<QueryButtons handleClick={handleGenerate}></QueryButtons>
 		</>
 	);
 }

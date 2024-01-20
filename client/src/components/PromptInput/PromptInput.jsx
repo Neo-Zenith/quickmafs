@@ -1,7 +1,11 @@
 import { useState } from "react";
-import TextField from "@mui/core/TextField";
+import { Input } from "@mui/base/Input";
+import "./PromptInput.css";
+import TextField from "@mui/material/TextField";
+import { Typography } from "@mui/material";
+import QueryButtons from "../QueryButtons/QueryButtons";
 
-const PromptInput = () => {
+export default function PromptInput() {
 	const [inputValue, setInputValue] = useState("");
 	const [error, setError] = useState("");
 
@@ -25,104 +29,26 @@ const PromptInput = () => {
 	};
 
 	return (
-		<form onSubmit={handleSubmit}>
-			<TextField
-				error={!!error}
-				helperText={error}
-				value={inputValue}
-				onChange={handleInputChange}
-				label="Input"
+		<div
+			style={{
+				display: "flex",
+				flexDirection: "column",
+				gap: "0.5rem",
+				width: "100%",
+				height: "100%",
+				paddingLeft: "1rem",
+				justifyContent: "center",
+			}}
+		>
+			<Typography sx={{ fontSize: "3rem", fontWeight: 700 }}>
+				Text Input
+			</Typography>
+
+			<Input
+				slotProps={{ input: { className: "prompt-input" } }}
+				placeholder="Enter your prompt here…"
 			/>
-			<button type="submit">Submit</button>
-		</form>
+			<QueryButtons />
+		</div>
 	);
-};
-
-export default PromptInput;
-
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-
-export default function MultilineTextFields() {
-  return (
-    <Box
-      component="form"
-      sx={{
-        '& .MuiTextField-root': { m: 1, width: '25ch' },
-      }}
-      noValidate
-      autoComplete="off"
-    >
-      <div>
-        <TextField
-          id="outlined-multiline-flexible"
-          label="Multiline"
-          multiline
-          maxRows={4}
-        />
-        <TextField
-          id="outlined-textarea"
-          label="Multiline Placeholder"
-          placeholder="Placeholder"
-          multiline
-        />
-        <TextField
-          id="outlined-multiline-static"
-          label="Multiline"
-          multiline
-          rows={4}
-          defaultValue="Default Value"
-        />
-      </div>
-      <div>
-        <TextField
-          id="filled-multiline-flexible"
-          label="Multiline"
-          multiline
-          maxRows={4}
-          variant="filled"
-        />
-        <TextField
-          id="filled-textarea"
-          label="Multiline Placeholder"
-          placeholder="Placeholder"
-          multiline
-          variant="filled"
-        />
-        <TextField
-          id="filled-multiline-static"
-          label="Multiline"
-          multiline
-          rows={4}
-          defaultValue="Default Value"
-          variant="filled"
-        />
-      </div>
-      <div>
-        <TextField
-          id="standard-multiline-flexible"
-          label="Multiline"
-          multiline
-          maxRows={4}
-          variant="standard"
-        />
-        <TextField
-          id="standard-textarea"
-          label="Multiline Placeholder"
-          placeholder="Placeholder"
-          multiline
-          variant="standard"
-        />
-        <TextField
-          id="standard-multiline-static"
-          label="Multiline"
-          multiline
-          rows={4}
-          defaultValue="Default Value"
-          variant="standard"
-        />
-      </div>
-    </Box>
-  );
 }

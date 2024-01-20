@@ -6,6 +6,7 @@ import storage from "redux-persist/lib/storage";
 const initialState = {
 	username: null,
 	authenticated: false,
+	loading: false,
 	codeOutput: {
 		code: "",
 		language: "c",
@@ -19,6 +20,8 @@ const reducer = (state = initialState, action) => {
 			return { ...state, username: action.payload };
 		case "SET_AUTHENTICATED":
 			return { ...state, authenticated: action.payload };
+		case "SET_LOADING":
+			return { ...state, loading: action.payload };
 		case "DISPLAY_CODE_OUTPUT":
 			return { ...state, codeOutput: action.payload };
 		default:
