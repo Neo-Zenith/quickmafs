@@ -1,14 +1,13 @@
 :root {
-	--color-primary: #13505B;
-	--color-secondary: #0C7489;
-	--color-tertiary: #119DA4;
-	--color-accent: #D7D9CE;
+	--color-primary: #13505b;
+	--color-secondary: #0c7489;
+	--color-tertiary: #119da4;
+	--color-accent: #d7d9ce;
 	--color-dark: #040404;
 }
 
 body {
 	font-family: Arial, sans-serif;
-	background-color: #160c28;
-	color: #efcb68;
-	margin: 0;
+	background-color: var(--color-primary);
+	color: var(--color-accent);
 }

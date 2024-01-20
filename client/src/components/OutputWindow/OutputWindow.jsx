@@ -1,6 +1,6 @@
 import { Box, IconButton, Typography } from "@mui/material";
 import CustomSnackbar from "../Snackbar/Snackbar";
-import { CodeBlock } from "react-code-blocks";
+import { CodeBlock, vs2015 } from "react-code-blocks";
 import ContentPasteIcon from "@mui/icons-material/ContentPaste";
 import DoneIcon from "@mui/icons-material/Done";
 import "./OutputWindow.css";
@@ -43,17 +43,14 @@ export default function OutputWindow({ context }) {
 				component="span"
 				sx={{
 					display: "block",
-					p: 1,
-					m: 1,
-					bgcolor: (theme) =>
-						theme.palette.mode === "dark" ? "#101010" : "#fff",
-					color: (theme) =>
-						theme.palette.mode === "dark" ? "grey.300" : "grey.800",
+					p: 2,
+					bgcolor: "#101010",
+					color: "grey.300",
 					border: "1px solid",
-					borderColor: (theme) =>
-						theme.palette.mode === "dark" ? "grey.800" : "grey.300",
+					borderColor: "grey.800",
 					borderRadius: 2,
 					fontSize: "0.875rem",
+					marginTop: "2.85rem",
 				}}
 			>
 				<div className="output-header">
@@ -78,11 +75,15 @@ export default function OutputWindow({ context }) {
 						)}
 					</IconButton>
 				</div>
+
 				<div className="output-content">
 					<CodeBlock
-						text={context.code}
-						language={context.language}
-						showLineNumbers={context.showLineNumbers}
+						// text={context.code}
+						text={"const a = 10; a++;"}
+						// language={context.language}
+						language={"javascript"}
+						showLineNumbes={context.showLineNumbers}
+						theme={vs2015}
 						wrapLines
 					/>
 				</div>
@@ -104,6 +105,7 @@ export default function OutputWindow({ context }) {
 					/>
 				</div>
 			</Box>
+
 			<CustomSnackbar
 				message="Code copied!"
 				isOpen={copied}

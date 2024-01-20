@@ -1,11 +1,13 @@
 .output-header {
 	display: flex;
 	width: 100%;
+	align-items: center;
 }
 
 .output-header-btn-content {
 	display: flex;
 	column-gap: 0.4rem;
+	color: var(--color-accent);
 }
 
 .output-content {
@@ -14,6 +16,7 @@
 
 .output-further-actions {
 	width: fit-content;
-	margin-top: 0.5rem;
+	margin-top: 1rem;
+	margin-bottom: 0.5rem;
 	margin-left: auto;
 }
