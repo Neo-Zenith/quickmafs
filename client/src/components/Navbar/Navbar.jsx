@@ -10,6 +10,8 @@ import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import { useSelector } from "react-redux";
 import Button from "@mui/material/Button";
+import { darken } from "@mui/material/styles";
+import "./Navbar.css";
 
 export default function Navbar() {
     const [anchorEl, setAnchorEl] = useState(null);
@@ -25,7 +27,10 @@ export default function Navbar() {
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static">
+            <AppBar
+                position="static"
+                sx={{ backgroundColor: "var(--color-primary)" }}
+            >
                 <Toolbar>
                     <IconButton
                         size="large"
@@ -44,7 +49,7 @@ export default function Navbar() {
                         APP NAME
                     </Typography>
                     {auth && (
-                        <div>
+                        <div className="navbar-actions">
                             <IconButton
                                 size="large"
                                 aria-label="account of current user"
@@ -71,21 +76,70 @@ export default function Navbar() {
                                 onClose={handleClose}
                             >
                                 <MenuItem onClick={handleClose}>
-                                    Profile
+                                    <Typography
+                                        sx={{
+                                            color: "var(--color-accent)",
+                                            fontSize: "0.8rem",
+                                        }}
+                                    >
+                                        Profile
+                                    </Typography>
                                 </MenuItem>
                                 <MenuItem onClick={handleClose}>
-                                    My account
+                                    <Typography
+                                        sx={{
+                                            color: "var(--color-accent)",
+                                            fontSize: "0.8rem",
+                                        }}
+                                    >
+                                        Profile
+                                    </Typography>
                                 </MenuItem>
                             </Menu>
                         </div>
                     )}
                     {!auth && (
-                        <div>
-                            <Button variant="outlined">
-                                <Typography color="white">Login</Typography>
+                        <div className="navbar-actions">
+                            <Button
+                                variant="outlined"
+                                sx={{
+                                    borderColor: "var(--color-secondary)",
+                                    borderWidth: "0.1rem",
+                                    "&:hover": {
+                                        borderColor: darken("#0C7489", 0.1), // Adjust the factor (0.1) as needed
+                                        borderWidth: "0.1rem",
+                                    },
+                                    color: "var(--color-secondary)",
+                                }}
+                            >
+                                <Typography
+                                    sx={{
+                                        color: "var(--color-accent)",
+                                        fontSize: "0.8rem",
+                                    }}
+                                >
+                                    Login
+                                </Typography>
                             </Button>
-                            <Button variant="contained" disableElevation>
-                                <Typography>Sign Up</Typography>
+                            <Button
+                                variant="contained"
+                                disableElevation
+                                sx={{
+                                    backgroundColor: "var(--color-secondary)",
+                                    "&:hover": {
+                                        backgroundColor: darken("#0C7489", 0.1), // Adjust the factor (0.1) as needed
+                                    },
+                                    color: "var(--color-secondary)",
+                                }}
+                            >
+                                <Typography
+                                    sx={{
+                                        color: "var(--color-accent)",
+                                        fontSize: "0.8rem",
+                                    }}
+                                >
+                                    Sign Up
+                                </Typography>
                             </Button>
                         </div>
                     )}
