@@ -21,9 +21,40 @@ app.use(
 );
 app.use(express.json());
 
+async function queryXLNET(data) {
+	const response = await fetch(
+		"https://api-inference.huggingface.co/models/xlnet/xlnet-base-cased",
+		{
+			headers: { Authorization: "Bearer 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" },
+			method: "POST",
+			body: JSON.stringify(data),
+		}
+	);
+	const result = await response.json();
+	return result;
+}
+
+
+
 app.get("/", (req, res) => {
   return res.json("hi");
 });
+
+app.get("/xlnet", async (req, res) => {
+  try {
+    const response = await queryXLNET({
+      "inputs": "Can you please let us know more details about your "
+    });
+    var ans = response[0]?.generated_text || '';
+    return res.json(ans);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+
+
 
 app.get("/output", (req, res) => {
   io.emit("new-output", "hello");
