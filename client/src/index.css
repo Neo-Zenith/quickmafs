@@ -8,7 +8,7 @@
 
 body {
 	font-family: Arial, sans-serif;
-	background-color: #160c28;
+	background-color: var(--color-primary);
 	color: #efcb68;
 	margin: 0;
 }
