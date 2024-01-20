@@ -18,7 +18,7 @@ jobs:
       with:
         host: ${{ secrets.AZURE_VM_IP }}
         username: ${{ secrets.AZURE_VM_USERNAME }}
-        key: ${{ secrets.AZURE_SSH_PRIVATE_KEY }}
+        password: ${{ secrets.AZURE_SSH_PASSWORD }}
         port: ${{ secrets.AZURE_VM_SSH_PORT }}
         script: |
           cd ntu-fast-fingers
