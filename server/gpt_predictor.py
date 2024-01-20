@@ -7,13 +7,19 @@ from flask import request
 from flask import Blueprint
 import openai
 from openai import OpenAI
+from flask_socketio import send, emit
 
 client = OpenAI(api_key = "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")
 bp = Blueprint("gpt_predictor", __name__, url_prefix="/gpt-predictor")
 
 CORS(bp)
 
+# @socketio.on('my-event')
+# def handle_my_custom_event(json):
+#     emit('new-output', json, broadcast=True)
 
+
+# @socketio.on('new-output')
 @bp.route("/", methods=["GET"])
 @cross_origin()
 def predict():
@@ -43,13 +49,21 @@ def predict():
             }
         ],
         temperature=0.7,
-        max_tokens=1024,
+        max_tokens=64,
         top_p=1,
         stream=True,
     )
     for chunk in stream:
         if chunk.choices[0].delta.content is not None:
-            print(chunk.choices[0].delta.content, end="")
+            # print(chunk.choices[0].delta.content, end="")
+            # send(chunk.choices[0].delta.content)
+            # print("emitting")
+            # handle_my_custom_event(chunk.choices[0].delta.content)
+            # emit('new-output', chunk.choices[0].delta.content, broadcast=True)
+            send("data")
+            # emit('new-output', chunk.choices[0].delta.content)
+
+            # emit('new-output', {"data": chunk.choices[0].delta.content})
             
     print("DONE")
     return {"status": "success"}
