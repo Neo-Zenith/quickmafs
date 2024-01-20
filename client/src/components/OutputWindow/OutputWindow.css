@@ -11,3 +11,9 @@
 .output-content {
     margin-top: 0.5rem;
 }
+
+.output-further-actions {
+    width: fit-content;
+    margin-top: 0.5rem;
+    margin-left: auto;
+}

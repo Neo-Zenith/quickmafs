@@ -5,6 +5,7 @@ import ContentPasteIcon from "@mui/icons-material/ContentPaste";
 import DoneIcon from "@mui/icons-material/Done";
 import "./OutputWindow.css";
 import { useState } from "react";
+import MenuDropdown from "../MenuDropdown/MenuDropdown";
 
 export default function OutputWindow({ context }) {
     const [copied, setCopied] = useState(false);
@@ -69,6 +70,9 @@ export default function OutputWindow({ context }) {
                         showLineNumbers={context.showLineNumbers}
                         wrapLines
                     />
+                </div>
+                <div className="output-further-actions">
+                    <MenuDropdown content={context.code} />
                 </div>
             </Box>
             <CustomSnackbar

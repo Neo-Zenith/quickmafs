@@ -1,6 +1,7 @@
 import OutputWindow from "./components/OutputWindow/OutputWindow";
 import CodeEditor from "./components/CodeEditor/CodeEditor";
 import { Grid } from "@mui/material";
+import Output from "./components/Output/Output";
 
 function App() {
 	return (
@@ -11,13 +12,7 @@ function App() {
 					<CodeEditor defaultCode={"# Paste/Enter your code here"} />
 				</Grid>
 				<Grid item xs={6}>
-					<OutputWindow
-						context={{
-							code: "const add = 1 + 2;\nvar i = add;",
-							language: "javascript",
-							showLineNumbers: true,
-						}}
-					/>
+					<Output />
 				</Grid>
 			</Grid>
 		</>
