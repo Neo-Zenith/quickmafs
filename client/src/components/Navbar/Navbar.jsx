@@ -19,6 +19,7 @@ export default function Navbar() {
     const [anchorEl, setAnchorEl] = useState(null);
     const auth = useSelector((state) => state.authenticated);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
 	const handleMenu = (event) => {
 		setAnchorEl(event.currentTarget);
@@ -74,6 +75,11 @@ export default function Navbar() {
                             }}
                             open={Boolean(anchorEl)}
                             onClose={handleClose}
+                            sx={{
+                                "& .MuiPaper-root": {
+                                    backgroundColor: "var(--color-secondary)",
+                                },
+                            }}
                         >
                             <MenuItem onClick={handleClose}>
                                 <Typography
@@ -85,14 +91,20 @@ export default function Navbar() {
                                     Profile
                                 </Typography>
                             </MenuItem>
-                            <MenuItem onClick={handleClose}>
+                            <MenuItem
+                                onClick={() => {
+                                    handleClose();
+                                    dispatch(setAuthenticated(false));
+                                    navigate("/");
+                                }}
+                            >
                                 <Typography
                                     sx={{
                                         color: "var(--color-accent)",
                                         fontSize: "0.8rem",
                                     }}
                                 >
-                                    Profile
+                                    Logout
                                 </Typography>
                             </MenuItem>
                         </Menu>
