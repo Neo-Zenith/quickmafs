@@ -9,24 +9,24 @@ export default function PromptInput() {
 	const [inputValue, setInputValue] = useState("");
 	const [error, setError] = useState("");
 
-	const handleInputChange = (e) => {
-		setInputValue(e.target.value);
-	};
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+  };
 
-	const handleSubmit = (e) => {
-		e.preventDefault();
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-		if (inputValue.trim() === "") {
-			setError("Please enter a value");
-			return;
-		}
+    if (inputValue.trim() === "") {
+      setError("Please enter a value");
+      return;
+    }
 
-		// Perform further validation or submit the form
+    // Perform further validation or submit the form
 
-		// Reset the input value and error state
-		setInputValue("");
-		setError("");
-	};
+    // Reset the input value and error state
+    setInputValue("");
+    setError("");
+  };
 
 	return (
 		<div
