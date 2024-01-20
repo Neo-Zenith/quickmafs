@@ -6,7 +6,7 @@ export default function Output() {
 
     useEffect(() => {
         // Establish WebSocket connection
-        const ws = new WebSocket("ws://10.110.128.35:5000");
+        const ws = new WebSocket("ws://10.5.0.2:5000");
 
         // Set up event listeners
         ws.onopen = () => {

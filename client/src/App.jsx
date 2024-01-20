@@ -12,13 +12,7 @@ function App() {
                     "/// some long ass comment so i can see whats happening"
                 }
             />
-            <OutputWindow
-                context={{
-                    code: "const add = 1 + 2;\nvar i = add;",
-                    language: "javascript",
-                    showLineNumbers: true,
-                }}
-            />
+
             <Output />
         </>
     );

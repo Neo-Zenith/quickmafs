@@ -3,12 +3,10 @@ import { styled, alpha } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import EditIcon from "@mui/icons-material/Edit";
-import Divider from "@mui/material/Divider";
-import ArchiveIcon from "@mui/icons-material/Archive";
-import FileCopyIcon from "@mui/icons-material/FileCopy";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import SourceIcon from "@mui/icons-material/Source";
+import ArticleIcon from "@mui/icons-material/Article";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import { Typography } from "@mui/material";
 
 const StyledMenu = styled((props) => (
     <Menu
@@ -64,46 +62,50 @@ export default function MenuDropdown() {
     };
 
     return (
-        <div>
+        <>
             <Button
-                id="demo-customized-button"
-                aria-controls={open ? "demo-customized-menu" : undefined}
+                id="output-window-further-action-btn"
+                aria-controls={open ? "menu" : undefined}
                 aria-haspopup="true"
                 aria-expanded={open ? "true" : undefined}
                 variant="contained"
                 disableElevation
                 onClick={handleClick}
-                endIcon={<KeyboardArrowDownIcon />}
+                endIcon={<KeyboardArrowDownIcon sx={{ fontSize: "0.7rem" }} />}
             >
-                Options
+                <Typography
+                    sx={{
+                        fontSize: "0.7rem",
+                        display: "flex", // Set display to flex
+                        alignItems: "center",
+                        lineHeight: 1,
+                    }}
+                >
+                    Export As
+                </Typography>
             </Button>
             <StyledMenu
-                id="demo-customized-menu"
+                id="output-window-further-action-menu"
                 MenuListProps={{
-                    "aria-labelledby": "demo-customized-button",
+                    "aria-labelledby": "output-window-further-action-btn",
                 }}
                 anchorEl={anchorEl}
                 open={open}
                 onClose={handleClose}
             >
                 <MenuItem onClick={handleClose} disableRipple>
-                    <EditIcon />
-                    Edit
+                    <ArticleIcon />
+                    <Typography sx={{ fontSize: "0.8rem" }}>
+                        Text File (.txt)
+                    </Typography>
                 </MenuItem>
                 <MenuItem onClick={handleClose} disableRipple>
-                    <FileCopyIcon />
-                    Duplicate
-                </MenuItem>
-                <Divider sx={{ my: 0.5 }} />
-                <MenuItem onClick={handleClose} disableRipple>
-                    <ArchiveIcon />
-                    Archive
-                </MenuItem>
-                <MenuItem onClick={handleClose} disableRipple>
-                    <MoreHorizIcon />
-                    More
+                    <SourceIcon />
+                    <Typography sx={{ fontSize: "0.8rem" }}>
+                        C Source code (.c)
+                    </Typography>
                 </MenuItem>
             </StyledMenu>
-        </div>
+        </>
     );
 }
