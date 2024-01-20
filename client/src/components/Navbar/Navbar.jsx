@@ -11,12 +11,15 @@ import { useSelector } from "react-redux";
 import Button from "@mui/material/Button";
 import { darken } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import "./Navbar.css";
+import { setAuthenticated } from "../../store/actions";
 
 export default function Navbar() {
     const [anchorEl, setAnchorEl] = useState(null);
     const auth = useSelector((state) => state.authenticated);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const handleMenu = (event) => {
         setAnchorEl(event.currentTarget);
@@ -72,6 +75,11 @@ export default function Navbar() {
                             }}
                             open={Boolean(anchorEl)}
                             onClose={handleClose}
+                            sx={{
+                                "& .MuiPaper-root": {
+                                    backgroundColor: "var(--color-secondary)",
+                                },
+                            }}
                         >
                             <MenuItem onClick={handleClose}>
                                 <Typography
@@ -83,14 +91,20 @@ export default function Navbar() {
                                     Profile
                                 </Typography>
                             </MenuItem>
-                            <MenuItem onClick={handleClose}>
+                            <MenuItem
+                                onClick={() => {
+                                    handleClose();
+                                    dispatch(setAuthenticated(false));
+                                    navigate("/");
+                                }}
+                            >
                                 <Typography
                                     sx={{
                                         color: "var(--color-accent)",
                                         fontSize: "0.8rem",
                                     }}
                                 >
-                                    Profile
+                                    Logout
                                 </Typography>
                             </MenuItem>
                         </Menu>

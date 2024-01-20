@@ -1,8 +1,14 @@
 import { Box, Button, Typography } from "@mui/material";
 import CustomTextField from "../TextField/TextField";
 import { darken } from "@mui/material/styles";
+import { useSelector, useDispatch } from "react-redux";
+import { setAuthenticated } from "../../store/actions";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginForm() {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
     return (
         <>
             <Box
@@ -74,6 +80,10 @@ export default function LoginForm() {
                             },
                             color: "var(--color-secondary)",
                             padding: "0.5rem 1.5rem",
+                        }}
+                        onClick={() => {
+                            dispatch(setAuthenticated(true));
+                            navigate("/query");
                         }}
                     >
                         <Typography
