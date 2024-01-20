@@ -8,11 +8,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 :root {
-	--color-primary: #13505b;
+	--color-primary: #0f434c;
 	--color-secondary: #0c7489;
 	--color-tertiary: #119da4;
 	--color-accent: #d7d9ce;
-	--color-dark: #040404;
+	--color-dark: #1c1c1c;
 }
 
 body {
