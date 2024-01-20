@@ -36,7 +36,8 @@ export default function HeroSection() {
             fontWeight: 300,
           }}
         >
-          This is a slogan for our app. Please try it out yay thanks.
+          You have the math mojo, I have the spagetthi code. Perfect
+          combination!
         </Typography>
         <Button
           variant="contained"
