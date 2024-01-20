@@ -5,6 +5,7 @@ const server = require("http").createServer(app);
 // const helmet = require("helmet");
 const cors = require("cors");
 // const authRouters = require("./routers/authRouter");
+require('dotenv').config()
 
 const io = new Server(server, {
   cors: {
@@ -25,7 +26,7 @@ async function queryXLNET(data) {
 	const response = await fetch(
 		"https://api-inference.huggingface.co/models/xlnet/xlnet-base-cased",
 		{
-			headers: { Authorization: "Bearer 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" },
+			headers: { Authorization: process.env.HUGGING_FACE_TOKEN },
 			method: "POST",
 			body: JSON.stringify(data),
 		}
