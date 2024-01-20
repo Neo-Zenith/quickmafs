@@ -14,7 +14,6 @@ function App() {
                     <Route path="/query" element={<QueryPage />} />
                     <Route path="/signup" element={<SignupPage />} />
                     <Route path="/login" element={<LoginPage />} />
-                    <Route path="/history" element={<HistoryPage />} />
                 </Routes>
             </Router>
         </>
