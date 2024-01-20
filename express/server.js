@@ -1,10 +1,17 @@
-const express = require("express");
+import express from "express";
+
 const app = express();
-const { Server } = require("socket.io");
-const server = require("http").createServer(app);
-const cors = require("cors");
-const OpenAI = require("openai");
-require("dotenv").config();
+import { Server } from "socket.io";
+import http from "http";
+const server = http.createServer(app);
+import cors from "cors";
+import OpenAI from "openai";
+import querystring from "querystring";
+import url from "url";
+import fs from "fs";
+
+import dotenv from "dotenv";
+dotenv.config();
 
 const io = new Server(server, {
   cors: {
@@ -54,6 +61,24 @@ app.get("/xlnet", async (req, res) => {
 app.get("/output", (req, res) => {
   io.emit("new-output", "hello");
   return res.json("successs");
+});
+
+// Image to expressions
+app.get("/image-to-expression", async (req, res) => {
+  const filename = "./img/test.png";
+  const data = fs.readFileSync(filename);
+  const response = await fetch(
+    "https://api-inference.huggingface.co/models/microsoft/trocr-small-printed",
+    {
+      headers: {
+        Authorization: "Bearer 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",
+      },
+      method: "POST",
+      body: data,
+    }
+  );
+  const result = await response.json();
+  return res.json({ success: true, result });
 });
 
 const schema = {
