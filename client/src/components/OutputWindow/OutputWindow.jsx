@@ -6,6 +6,8 @@ import DoneIcon from "@mui/icons-material/Done";
 import "./OutputWindow.css";
 import { useState } from "react";
 import MenuDropdown from "../MenuDropdown/MenuDropdown";
+import SourceIcon from "@mui/icons-material/Source";
+import ArticleIcon from "@mui/icons-material/Article";
 
 export default function OutputWindow({ context }) {
     const [copied, setCopied] = useState(false);
@@ -20,6 +22,19 @@ export default function OutputWindow({ context }) {
                 console.error("Unable to copy to clipboard", err);
             }
         );
+    };
+
+    const handleDownload = (extension, content) => {
+        const blob = new Blob([content], { type: "text/plain" });
+        const url = URL.createObjectURL(blob);
+
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = extension === "c" ? "code.c" : "code.txt";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
     };
 
     return (
@@ -72,7 +87,22 @@ export default function OutputWindow({ context }) {
                     />
                 </div>
                 <div className="output-further-actions">
-                    <MenuDropdown content={context.code} />
+                    <MenuDropdown
+                        title={"Export As"}
+                        items={[
+                            {
+                                label: "Text File (.txt)",
+                                action: () =>
+                                    handleDownload("txt", context.code),
+                                icon: <ArticleIcon />,
+                            },
+                            {
+                                label: "C Source Code (.c)",
+                                action: () => handleDownload("c", context.code),
+                                icon: <SourceIcon />,
+                            },
+                        ]}
+                    />
                 </div>
             </Box>
             <CustomSnackbar
