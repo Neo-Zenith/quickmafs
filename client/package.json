@@ -12,12 +12,14 @@
   "dependencies": {
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
+    "@monaco-editor/react": "^4.6.0",
     "@mui/icons-material": "^5.15.5",
     "@mui/material": "^5.15.5",
-    "@monaco-editor/react": "^4.6.0",
     "react": "^18.2.0",
     "react-code-blocks": "^0.1.6",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "socket.io": "^4.7.4",
+    "socket.io-client": "^4.7.4"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",
