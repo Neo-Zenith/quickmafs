@@ -1,8 +1,26 @@
-import { Box, Typography } from "@mui/material";
-import { CodeBlock, CopyBlock } from "react-code-blocks";
+import { Box, IconButton, Typography } from "@mui/material";
+import CustomSnackbar from "../Snackbar/Snackbar";
+import { CodeBlock } from "react-code-blocks";
+import ContentPasteIcon from "@mui/icons-material/ContentPaste";
+import DoneIcon from "@mui/icons-material/Done";
 import "./OutputWindow.css";
+import { useState } from "react";
 
 export default function OutputWindow({ context }) {
+    const [copied, setCopied] = useState(false);
+
+    const copyToClipboard = () => {
+        navigator.clipboard.writeText(context.code).then(
+            () => {
+                console.log("Code copied to clipboard");
+                setCopied(true);
+            },
+            (err) => {
+                console.error("Unable to copy to clipboard", err);
+            }
+        );
+    };
+
     return (
         <>
             <Box
@@ -22,9 +40,28 @@ export default function OutputWindow({ context }) {
                     fontSize: "0.875rem",
                 }}
             >
-                <Typography sx={{ fontSize: "1rem", fontWeight: 700 }}>
-                    Output
-                </Typography>
+                <div className="output-header">
+                    <Typography sx={{ fontSize: "1rem", fontWeight: 700 }}>
+                        Output
+                    </Typography>
+                    <IconButton
+                        sx={{ marginLeft: "auto" }}
+                        onClick={copyToClipboard}
+                        disabled={copied}
+                    >
+                        {copied ? (
+                            <div className="output-header-btn-content">
+                                <DoneIcon sx={{ fontSize: "1rem" }} />
+                                <Typography variant="body2">Done</Typography>
+                            </div>
+                        ) : (
+                            <div className="output-header-btn-content">
+                                <ContentPasteIcon sx={{ fontSize: "1rem" }} />
+                                <Typography variant="body2">Copy</Typography>
+                            </div>
+                        )}
+                    </IconButton>
+                </div>
                 <div className="output-content">
                     <CodeBlock
                         text={context.code}
@@ -34,6 +71,11 @@ export default function OutputWindow({ context }) {
                     />
                 </div>
             </Box>
+            <CustomSnackbar
+                message="Code copied!"
+                isOpen={copied}
+                onClose={() => setCopied(false)}
+            />
         </>
     );
 }
