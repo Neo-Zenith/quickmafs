@@ -51,7 +51,7 @@ const StyledMenu = styled((props) => (
     },
 }));
 
-export default function MenuDropdown() {
+export default function MenuDropdown({ content }) {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -59,6 +59,19 @@ export default function MenuDropdown() {
     };
     const handleClose = () => {
         setAnchorEl(null);
+    };
+
+    const handleDownload = (extension) => {
+        const blob = new Blob([content], { type: "text/plain" });
+        const url = URL.createObjectURL(blob);
+
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = extension === "c" ? "code.c" : "code.txt";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
     };
 
     return (
@@ -93,13 +106,25 @@ export default function MenuDropdown() {
                 open={open}
                 onClose={handleClose}
             >
-                <MenuItem onClick={handleClose} disableRipple>
+                <MenuItem
+                    onClick={() => {
+                        handleClose();
+                        handleDownload("txt");
+                    }}
+                    disableRipple
+                >
                     <ArticleIcon />
                     <Typography sx={{ fontSize: "0.8rem" }}>
                         Text File (.txt)
                     </Typography>
                 </MenuItem>
-                <MenuItem onClick={handleClose} disableRipple>
+                <MenuItem
+                    onClick={() => {
+                        handleClose();
+                        handleDownload("c");
+                    }}
+                    disableRipple
+                >
                     <SourceIcon />
                     <Typography sx={{ fontSize: "0.8rem" }}>
                         C Source code (.c)

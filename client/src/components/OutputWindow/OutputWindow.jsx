@@ -72,7 +72,7 @@ export default function OutputWindow({ context }) {
                     />
                 </div>
                 <div className="output-further-actions">
-                    <MenuDropdown />
+                    <MenuDropdown content={context.code} />
                 </div>
             </Box>
             <CustomSnackbar
