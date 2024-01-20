@@ -19,4 +19,5 @@ body {
 	font-family: Arial, sans-serif;
 	background-color: var(--color-primary);
 	color: var(--color-accent);
+	margin: 0;
 }

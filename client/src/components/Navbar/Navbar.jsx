@@ -26,125 +26,121 @@ export default function Navbar() {
     };
 
     return (
-        <Box sx={{ flexGrow: 1 }}>
-            <AppBar
-                position="static"
-                sx={{ backgroundColor: "var(--color-primary)" }}
-            >
-                <Toolbar>
-                    <IconButton
-                        size="large"
-                        edge="start"
-                        color="inherit"
-                        aria-label="menu"
-                        sx={{ mr: 2 }}
-                    >
-                        <MenuIcon />
-                    </IconButton>
-                    <Typography
-                        variant="h6"
-                        component="div"
-                        sx={{ flexGrow: 1 }}
-                    >
-                        APP NAME
-                    </Typography>
-                    {auth && (
-                        <div className="navbar-actions">
-                            <IconButton
-                                size="large"
-                                aria-label="account of current user"
-                                aria-controls="menu-appbar"
-                                aria-haspopup="true"
-                                onClick={handleMenu}
-                                color="inherit"
-                            >
-                                <AccountCircle />
-                            </IconButton>
-                            <Menu
-                                id="menu-appbar"
-                                anchorEl={anchorEl}
-                                anchorOrigin={{
-                                    vertical: "top",
-                                    horizontal: "right",
-                                }}
-                                keepMounted
-                                transformOrigin={{
-                                    vertical: "top",
-                                    horizontal: "right",
-                                }}
-                                open={Boolean(anchorEl)}
-                                onClose={handleClose}
-                            >
-                                <MenuItem onClick={handleClose}>
-                                    <Typography
-                                        sx={{
-                                            color: "var(--color-accent)",
-                                            fontSize: "0.8rem",
-                                        }}
-                                    >
-                                        Profile
-                                    </Typography>
-                                </MenuItem>
-                                <MenuItem onClick={handleClose}>
-                                    <Typography
-                                        sx={{
-                                            color: "var(--color-accent)",
-                                            fontSize: "0.8rem",
-                                        }}
-                                    >
-                                        Profile
-                                    </Typography>
-                                </MenuItem>
-                            </Menu>
-                        </div>
-                    )}
-                    {!auth && (
-                        <div className="navbar-actions">
-                            <Button
-                                variant="outlined"
-                                sx={{
-                                    borderColor: "var(--color-secondary)",
+        <AppBar
+            position="fixed"
+            sx={{
+                backgroundColor: "var(--color-primary)",
+            }}
+        >
+            <Toolbar>
+                <IconButton
+                    size="large"
+                    edge="start"
+                    color="inherit"
+                    aria-label="menu"
+                    sx={{ mr: 2 }}
+                >
+                    <MenuIcon />
+                </IconButton>
+                <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                    APP NAME
+                </Typography>
+                {auth && (
+                    <div className="navbar-actions">
+                        <IconButton
+                            size="large"
+                            aria-label="account of current user"
+                            aria-controls="menu-appbar"
+                            aria-haspopup="true"
+                            onClick={handleMenu}
+                            color="inherit"
+                        >
+                            <AccountCircle />
+                        </IconButton>
+                        <Menu
+                            id="menu-appbar"
+                            anchorEl={anchorEl}
+                            anchorOrigin={{
+                                vertical: "top",
+                                horizontal: "right",
+                            }}
+                            keepMounted
+                            transformOrigin={{
+                                vertical: "top",
+                                horizontal: "right",
+                            }}
+                            open={Boolean(anchorEl)}
+                            onClose={handleClose}
+                        >
+                            <MenuItem onClick={handleClose}>
+                                <Typography
+                                    sx={{
+                                        color: "var(--color-accent)",
+                                        fontSize: "0.8rem",
+                                    }}
+                                >
+                                    Profile
+                                </Typography>
+                            </MenuItem>
+                            <MenuItem onClick={handleClose}>
+                                <Typography
+                                    sx={{
+                                        color: "var(--color-accent)",
+                                        fontSize: "0.8rem",
+                                    }}
+                                >
+                                    Profile
+                                </Typography>
+                            </MenuItem>
+                        </Menu>
+                    </div>
+                )}
+                {!auth && (
+                    <div className="navbar-actions">
+                        <Button
+                            variant="outlined"
+                            sx={{
+                                borderColor: "var(--color-secondary)",
+                                borderWidth: "0.1rem",
+                                "&:hover": {
+                                    borderColor: darken("#0C7489", 0.1), // Adjust the factor (0.1) as needed
                                     borderWidth: "0.1rem",
-                                    "&:hover": {
-                                        borderColor: darken("#0C7489", 0.1), // Adjust the factor (0.1) as needed
-                                        borderWidth: "0.1rem",
-                                    },
-                                    color: "var(--color-secondary)",
-                                }}
-                            >
-                                <Typography
-                                    sx={{
-                                        color: "var(--color-accent)",
-                                        fontSize: "0.8rem",
-                                    }}
-                                >
-                                    Login
-                                </Typography>
-                            </Button>
-                            <Button
-                                variant="contained"
-                                disableElevation
+                                },
+                                color: "var(--color-secondary)",
+                            }}
+                        >
+                            <Typography
                                 sx={{
-                                    backgroundColor: "var(--color-secondary)",
-                                    "&:hover": {
-                                        backgroundColor: darken("#0C7489", 0.1), // Adjust the factor (0.1) as needed
-                                    },
-                                    color: "var(--color-secondary)",
+                                    color: "var(--color-accent)",
+                                    fontSize: "0.8rem",
                                 }}
                             >
-                                <Typography
-                                    sx={{
-                                        color: "var(--color-accent)",
-                                        fontSize: "0.8rem",
-                                    }}
-                                >
-                                    Sign Up
-                                </Typography>
-                            </Button>
-                        </div>
-                    )}
-                </Toolbar>
-            </AppBar>
-        </Box>
+                                Login
+                            </Typography>
+                        </Button>
+                        <Button
+                            variant="contained"
+                            disableElevation
+                            sx={{
+                                backgroundColor: "var(--color-secondary)",
+                                "&:hover": {
+                                    backgroundColor: darken("#0C7489", 0.1), // Adjust the factor (0.1) as needed
+                                },
+                                color: "var(--color-secondary)",
+                            }}
+                        >
+                            <Typography
+                                sx={{
+                                    color: "var(--color-accent)",
+                                    fontSize: "0.8rem",
+                                }}
+                            >
+                                Sign Up
+                            </Typography>
+                        </Button>
+                    </div>
+                )}
+            </Toolbar>
+        </AppBar>
     );
 }
