@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { Input } from "@mui/base/Input";
-import "./PromptInput.css";
+import { Button } from "@mui/material";
 import { Typography } from "@mui/material";
 import QueryButtons from "../QueryButtons/QueryButtons";
 import { useDispatch } from "react-redux";
+import "./PromptInput.css";
 
 export default function PromptInput() {
   const [inputValue, setInputValue] = useState("");
@@ -13,13 +14,48 @@ export default function PromptInput() {
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
   };
-  const handleInputChange = (e) => {
-    setInputValue(e.target.value);
+
+  const handleFileUpload = (e) => {
+    if (e.target.files.length === 0) {
+      return;
+    }
+
+    const file = e.target.files[0];
+    const imgUrl = URL.createObjectURL(file);
+    const link = document.createElement("a");
+    link.href = imgUrl;
+    link.download = "upload.png";
+    link.style.display = "none";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    const url = "http://localhost:5000/image-to-expression";
+    dispatch({ type: "SET_LOADING", payload: true });
+    fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json(); // Parse the response body as JSON
+      })
+      .then((data) => {
+        console.log("Query success:", data);
+        setInputValue(data.result[0].generated_text);
+        dispatch({ type: "SET_LOADING", payload: false });
+      })
+      .catch((error) => {
+        console.error("Error fetching response:", error);
+        dispatch({ type: "SET_LOADING", payload: false });
+      });
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-
     if (inputValue.trim() === "") {
       setError("Please enter a value");
       return;
@@ -65,11 +101,6 @@ export default function PromptInput() {
       });
 
     // Reset the input value and error state
-    setInputValue("");
-    setError("");
-  };
-    // Reset the input value and error state
-    setInputValue("");
     setError("");
   };
 
@@ -90,10 +121,19 @@ export default function PromptInput() {
       </Typography>
 
       <Input
+        value={inputValue}
+        error={error}
+        onChange={handleInputChange}
         slotProps={{ input: { className: "prompt-input" } }}
         placeholder="Enter your prompt here…"
       />
-      <QueryButtons />
+
+      <Button variant="contained" component="label">
+        Upload Image
+        <input type="file" hidden onChange={handleFileUpload} />
+      </Button>
+
+      <QueryButtons handleClick={handleSubmit} containerWidth={"90%"} />
     </div>
   );
 }

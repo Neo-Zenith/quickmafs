@@ -1,29 +1,36 @@
-import { Grid } from "@mui/material";
+import { Button, Grid } from "@mui/material";
 import CodeEditor from "../components/CodeEditor/CodeEditor";
 import PromptInput from "../components/PromptInput/PromptInput";
 import Output from "../components/Output/Output";
 import { useState } from "react";
 
-const myMap = new Map([
-  ["code", [6, 6]],
-  ["text", [5, 7]],
-]);
-
 export default function QueryPage() {
-  const [type, setType] = useState("text");
-  const [length1, length2] = myMap.get(type);
+  const [showCodeEditor, setShowCodeEditor] = useState(true);
+
+  const toggleEditor = () => {
+    setShowCodeEditor(!showCodeEditor);
+  };
 
   return (
     <>
       <h1 style={{ textAlign: "center" }}>Monaco Editor Example</h1>
 
+      <div style={{ textAlign: "center", marginTop: "1rem" }}>
+        <Button variant="contained" color="info" onClick={toggleEditor}>
+          Toggle Editor
+        </Button>
+      </div>
+
       <div style={{ paddingLeft: "1rem", paddingRight: "1rem" }}>
         <Grid container spacing={2}>
-          <Grid item xs={length1}>
-            {/* <CodeEditor defaultCode={"# Paste/Enter your code here"} /> */}
-            <PromptInput />
+          <Grid item xs={showCodeEditor ? 6 : 5}>
+            {showCodeEditor ? (
+              <CodeEditor defaultCode={"# Paste/Enter your code here"} />
+            ) : (
+              <PromptInput />
+            )}
           </Grid>
-          <Grid item xs={length2}>
+          <Grid item xs={showCodeEditor ? 6 : 7}>
             <Output />
           </Grid>
         </Grid>
