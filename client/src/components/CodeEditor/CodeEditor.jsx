@@ -10,6 +10,7 @@ const languageCommentsMap = new Map([
   ["javascript", "// Paste/Enter your code here"],
   ["python", "# Paste/Enter your code here"],
   ["java", "// Paste/Enter your code here"],
+  ["c++", "// Paste/Enter your code here"],
   ["html", "<!-- Paste/Enter your code here -->"],
   ["css", "/* Paste/Enter your code here */"],
   ["ruby", "# Paste/Enter your code here"],
@@ -128,6 +129,18 @@ export default function CodeEditor({ defaultCode }) {
               label: "Python",
               action: () => handleDropdownClick("python"),
             },
+            {
+              label: "C++",
+              action: () => handleDropdownClick("c++"),
+            },
+            {
+              label: "Java",
+              action: () => handleDropdownClick("java"),
+            },
+            {
+              label: "Ruby",
+              action: () => handleDropdownClick("ruby"),
+            },
           ]}
         />
       </div>
@@ -146,7 +159,7 @@ export default function CodeEditor({ defaultCode }) {
         onValidate={handleEditorValidation}
       />
 
-      <QueryButtons handleClick={handleGenerate} containerWidth={"100%"} />
+      <QueryButtons handleClick={handleGenerate} />
     </>
   );
 }

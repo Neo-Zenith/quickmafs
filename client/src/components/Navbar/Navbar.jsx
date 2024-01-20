@@ -88,7 +88,12 @@ export default function Navbar() {
                 },
               }}
             >
-              <MenuItem onClick={handleClose}>
+              <MenuItem
+                onClick={() => {
+                  handleClose();
+                  navigate("/profile");
+                }}
+              >
                 <Typography
                   sx={{
                     color: "var(--color-accent)",

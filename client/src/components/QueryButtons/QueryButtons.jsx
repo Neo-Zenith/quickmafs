@@ -3,14 +3,14 @@ import Stack from "@mui/material/Stack";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 
-export default function QueryButtons({ handleClick, containerWidth }) {
+export default function QueryButtons({ handleClick }) {
   const loading = useSelector((state) => state.loading);
 
   return (
     <Stack
+      width="100%"
       justifyContent="space-between"
       direction="row"
-      width={containerWidth}
       marginTop={2}
     >
       <Button
@@ -21,11 +21,7 @@ export default function QueryButtons({ handleClick, containerWidth }) {
         }}
         disabled={loading}
       >
-        Generate
-      </Button>
-
-      <Button variant="contained" color="error" disabled={!loading}>
-        Cancel
+        {loading ? "Loading..." : "Generate"}
       </Button>
     </Stack>
   );

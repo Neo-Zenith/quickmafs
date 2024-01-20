@@ -130,7 +130,7 @@ export default function PromptInput() {
         <input type="file" hidden onChange={handleFileUpload} />
       </Button>
 
-      <QueryButtons handleClick={handleSubmit} containerWidth={"100%"} />
+      <QueryButtons handleClick={handleSubmit} />
     </div>
   );
 }

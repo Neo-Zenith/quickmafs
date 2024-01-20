@@ -16,9 +16,7 @@ export default function QueryPage() {
     <>
       <Navbar />
       <div style={{ marginTop: "6rem" }}>
-        <h1 style={{ textAlign: "center" }}>Monaco Editor Example</h1>
-
-        <div style={{ textAlign: "center", marginTop: "1rem" }}>
+        <div style={{ textAlign: "center" }}>
           <Button variant="contained" color="info" onClick={toggleEditor}>
             Toggle Editor
           </Button>

@@ -1,25 +1,25 @@
 /* IBM Plex Mono */
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
 
 /* Spectral */
-@import url('https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap");
 
 /* Roboto */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 
 :root {
-	--color-primary: #0f434c;
-	--color-secondary: #0c7489;
-	--color-tertiary: #119da4;
-	--color-accent: #d7d9ce;
-	--color-dark: #1c1c1c;
-
-	--color-test: #194f58;
+  --color-primary: #0f434c;
+  --color-secondary: #0c7489;
+  --color-tertiary: #119da4;
+  --color-accent: #d7d9ce;
+  --color-dark: #1c1c1c;
+  --color-test: #194f58;
+  --color-white: #fff;
 }
 
 body {
-	font-family: Arial, sans-serif;
-	background-color: var(--color-primary);
-	color: var(--color-accent);
-	margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: var(--color-primary);
+  color: var(--color-accent);
+  margin: 0;
 }
