@@ -6,8 +6,6 @@ import http from "http";
 const server = http.createServer(app);
 import cors from "cors";
 import OpenAI from "openai";
-import querystring from "querystring";
-import url from "url";
 import fs from "fs";
 
 import dotenv from "dotenv";
@@ -63,58 +61,67 @@ app.get("/output", (req, res) => {
   return res.json("successs");
 });
 
-// Image to expressions
-app.get("/image-to-expression", async (req, res) => {
-  const filename = "./img/test.png";
-  const data = fs.readFileSync(filename);
-  const response = await fetch(
-    "https://api-inference.huggingface.co/models/microsoft/trocr-small-printed",
-    {
-      headers: {
-        Authorization: "Bearer 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",
-      },
-      method: "POST",
-      body: data,
-    }
-  );
-  const result = await response.json();
-  return res.json({ success: true, result });
-});
-
-const schema = {
+const get_family_schema = {
   type: "object",
   properties: {
-    code: {
+    family: {
       type: "string",
-      description: "Generated C code",
+      description:
+        "either Linear Programming, Quadratic Programming and Semidefinite Programming",
     },
   },
-  required: ["code"],
+  required: ["family"],
 };
 
-// openai
-const openai = new OpenAI({
-  apiKey: "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",
+app.post("/get-family", async (req, res) => {
+  // just for testing
+  const { content } = req.body;
+  const familyObj = await get_family(content);
+  return res.json({ success: true, familyObj });
 });
 
-app.post("/openai", async (req, res) => {
-  const { language, content } = req.body;
-  const stream = await openai.chat.completions.create({
+const get_family = async (content) => {
+  const openai_res = await openai.chat.completions.create({
     model: "gpt-4",
     messages: [
       {
         role: "system",
-        content: `Context: You are an engineer working on convex optimization problem with applications from finance to 
-        healthcare and control systems. Your job is to convert mathematical expression with convex objectives into efficient C code for
-        embedded devices. You must focus on three problem family: Linear Programming, Quadratic Programming and Semidefinite Programming.
-        When the user input the math question, you must decide which problem family it belongs to.
-        To implement the solution of a Linear programming convex optimization problem in C code, you must use <glpk.h>.
-        To implement the solution of a Quadratic programming convex optimization problem in C code, you must use <quadprog.h>.
-        To implement the solution of a Semidefinite programming convex optimization problem in C code, you must use  <cvxopt.h>.
-        Make sure the C code generated is correct and with zero error. This task is very important, you will get fired if you fail it.
-        The team relies on you.
-
+        content: `Context: You are an engineer working on convex optimization problem. 
+        Your job is to classfiy mathematical expression or code with convex objectives into three problem family: Linear Programming, Quadratic Programming and Semidefinite Programming.
+        
         Example of linear programming Input:
+        f(x)=x^2+2x+1 with the constraint x≥2
+  
+        Example of Quadratic Programming Input:
+        Minimize: 1/2x^2 + 2xy +3y^2 +x +y
+        Subject to: x+y >= 10, 2x-y<=5
+  
+        Example of Semidefinite Programming Input:
+        Minimize: Tr(C⋅X)
+        Subject to: Tr(Ai⋅X)=bi, i=1,...,m and X⪰0
+  
+        Output your answer in either Linear Programming, Quadratic Programming and Semidefinite Programming
+        `,
+      },
+      {
+        role: "user",
+        content,
+      },
+    ],
+    // stream: true,
+    max_tokens: 128,
+    // top_p: 1,
+    functions: [{ name: "format_response", parameters: get_family_schema }],
+    function_call: { name: "format_response" },
+  });
+
+  const response = openai_res.choices[0].message.function_call.arguments;
+  const familyObj = JSON.parse(response);
+  return familyObj;
+};
+
+const linearPrompt = `
+    Example of linear programming Input:
         f(x)=x^2+2x+1 with the constraint x≥2
 
         Example of linear programming Output:
@@ -163,8 +170,10 @@ app.post("/openai", async (req, res) => {
 
             return 0;
         }
+`;
 
-        Example of Quadratic Programming Input:
+const quadraticPrompt = `
+    Example of Quadratic Programming Input:
         Minimize: 1/2x^2 + 2xy +3y^2 +x +y
         Subject to: x+y >= 10, 2x-y<=5
 
@@ -201,8 +210,10 @@ app.post("/openai", async (req, res) => {
             }
             return 0;
         }
+`;
 
-        Example of Semidefinite Programming Input:
+const semidefinitePrompt = `
+    Example of Semidefinite Programming Input:
         Minimize: Tr(C⋅X)
         Subject to: Tr(Ai⋅X)=bi, i=1,...,m and X⪰0
 
@@ -246,6 +257,77 @@ app.post("/openai", async (req, res) => {
             destroy_quadprog_matrix(X);
 
             return 0;
+      }
+`;
+
+// Image to expressions
+app.get("/image-to-expression", async (req, res) => {
+  const filename = "./img/upload.png";
+  const data = fs.readFileSync(filename);
+  const response = await fetch(
+    "https://api-inference.huggingface.co/models/microsoft/trocr-small-printed",
+    {
+      headers: {
+        Authorization: "Bearer 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",
+      },
+      method: "POST",
+      body: data,
+    }
+  );
+  const result = await response.json();
+  return res.json({ success: true, result });
+});
+
+const schema = {
+  type: "object",
+  properties: {
+    code: {
+      type: "string",
+      description: "Generated C code",
+    },
+  },
+  required: ["code"],
+};
+
+// openai
+const openai = new OpenAI({
+  apiKey: "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",
+});
+
+app.post("/openai", async (req, res) => {
+  // type - exp or code
+  const { type, content, language } = req.body;
+
+  // get family first
+  const { family } = await get_family(content);
+  console.log("PREDICTED FAMILY: " + family);
+
+  const stream = await openai.chat.completions.create({
+    model: "gpt-4",
+    messages: [
+      {
+        role: "system",
+        content: `Context: You are an engineer working on convex optimization problem with applications from finance to 
+        healthcare and control systems. Your job is to convert ${
+          type === "exp" ? "mathematical expression" : `${language} code`
+        } with convex objectives into efficient C code for
+        embedded devices. You must focus on ${family}.
+        Since the family is ${family}, you must use ${
+          family === "Linear Programming"
+            ? "<glpk.h>"
+            : family === "Quadratic Programming"
+            ? "<quadprog.h>"
+            : "<cvxopt.h>"
+        }.
+        Make sure the C code generated is correct and with zero error. This task is very important, you will get fired if you fail it.
+        The team relies on you.
+
+        ${
+          family === "Linear Programming"
+            ? linearPrompt
+            : family === "Quadratic Programming"
+            ? quadraticPrompt
+            : semidefinitePrompt
         }
         `,
       },
@@ -261,7 +343,7 @@ app.post("/openai", async (req, res) => {
     function_call: { name: "format_response" },
   });
 
-  const response = await stream.choices[0].message.function_call.arguments;
+  const response = stream.choices[0].message.function_call.arguments;
 
   const codeObj = JSON.parse(response);
   // for await (const chunk of stream) {
@@ -272,16 +354,7 @@ app.post("/openai", async (req, res) => {
   return res.json({ result: "success", response: codeObj });
 });
 
-// io.use(wrap(sessionMiddleware));
-// io.use(authorizeUser);
-io.on("connect", (socket) => {
-  //   console.log(socket);
-  //   initializeUser(socket);
-  //   socket.on("add-friend", (friendName, cb) => {
-  //     addFriend(socket, friendName, cb);
-  //   });
-  //   socket.on("disconnecting", () => onDisconnect(socket));
-});
+io.on("connect", (socket) => {});
 
 server.listen(5000, () => {
   console.log("Listening at port 5000");
