@@ -41,5 +41,17 @@ socketio = SocketIO(app, cors_allowed_origins="*")
 #     emit('my response', json)
     
 if __name__ == "__main__":
+    app = create_app()
+    socketio = SocketIO(app, cors_allowed_origins="*")
     socketio.run(app)
     
+@cross_origin()
+@socketio.on('connect')
+def test_connect(auth):
+    print("Connected")
+    emit('my response', {'data': 'Connected'})
+
+@cross_origin()
+@socketio.on('my event')
+def handle_my_custom_event(json):
+    emit('my response', json)

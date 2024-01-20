@@ -3,8 +3,6 @@ import { styled, alpha } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import SourceIcon from "@mui/icons-material/Source";
-import ArticleIcon from "@mui/icons-material/Article";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { Typography } from "@mui/material";
 
@@ -51,8 +49,9 @@ const StyledMenu = styled((props) => (
     },
 }));
 
-export default function MenuDropdown() {
+export default function MenuDropdown({ title, items, replaceTitle }) {
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const [currentSelection, setCurrentSelection] = React.useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -81,7 +80,9 @@ export default function MenuDropdown() {
                         lineHeight: 1,
                     }}
                 >
-                    Export As
+                    {replaceTitle && currentSelection
+                        ? currentSelection
+                        : title}
                 </Typography>
             </Button>
             <StyledMenu
@@ -93,18 +94,24 @@ export default function MenuDropdown() {
                 open={open}
                 onClose={handleClose}
             >
-                <MenuItem onClick={handleClose} disableRipple>
-                    <ArticleIcon />
-                    <Typography sx={{ fontSize: "0.8rem" }}>
-                        Text File (.txt)
-                    </Typography>
-                </MenuItem>
-                <MenuItem onClick={handleClose} disableRipple>
-                    <SourceIcon />
-                    <Typography sx={{ fontSize: "0.8rem" }}>
-                        C Source code (.c)
-                    </Typography>
-                </MenuItem>
+                {items.map((item, idx) => {
+                    return (
+                        <MenuItem
+                            key={idx}
+                            onClick={() => {
+                                handleClose();
+                                item.action();
+                                setCurrentSelection(item.label);
+                            }}
+                            disableRipple
+                        >
+                            {item.icon}
+                            <Typography sx={{ fontSize: "0.8rem" }}>
+                                {item.label}
+                            </Typography>
+                        </MenuItem>
+                    );
+                })}
             </StyledMenu>
         </>
     );

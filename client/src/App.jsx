@@ -1,21 +1,22 @@
 import OutputWindow from "./components/OutputWindow/OutputWindow";
-import CodeEditor from "./components/CodeEditor";
+import CodeEditor from "./components/CodeEditor/CodeEditor";
+import { Grid } from "@mui/material";
 import Output from "./components/Output/Output";
 
 function App() {
-    // testing OutputWindow.jsx on main page
-    return (
-        <>
-            <h1>Monaco Editor Example</h1>
-            <CodeEditor
-                defaultCode={
-                    "/// some long ass comment so i can see whats happening"
-                }
-            />
-
-            <Output />
-        </>
-    );
+	return (
+		<>
+			<h1>Monaco Editor Example</h1>
+			<Grid container spacing={2}>
+				<Grid item xs={6}>
+					<CodeEditor defaultCode={"# Paste/Enter your code here"} />
+				</Grid>
+				<Grid item xs={6}>
+					<Output />
+				</Grid>
+			</Grid>
+		</>
+	);
 }
 
 export default App;
