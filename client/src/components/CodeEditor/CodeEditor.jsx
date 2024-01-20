@@ -4,6 +4,7 @@ import Editor from "@monaco-editor/react";
 import MenuDropdown from "../MenuDropdown/MenuDropdown";
 import "./COdeEditor.css";
 import QueryButtons from "../QueryButtons/QueryButtons";
+import { Typography } from "@mui/material";
 
 const languageCommentsMap = new Map([
   ["javascript", "// Paste/Enter your code here"],
@@ -104,7 +105,17 @@ export default function CodeEditor({ defaultCode }) {
 
   return (
     <>
-      <div style={{ marginBottom: "1rem" }}>
+      <div
+        style={{
+          display: "flex",
+          gap: "2rem",
+          alignItems: "center",
+          marginBottom: "1rem",
+        }}
+      >
+        <Typography sx={{ fontSize: "1.5rem", fontWeight: 700 }}>
+          Code Input
+        </Typography>
         <MenuDropdown
           title={language}
           replaceTitle={true}
@@ -122,7 +133,7 @@ export default function CodeEditor({ defaultCode }) {
       </div>
 
       <Editor
-        height="65vh"
+        height="60vh"
         theme="vs-dark"
         className="container"
         language={language}
@@ -135,7 +146,7 @@ export default function CodeEditor({ defaultCode }) {
         onValidate={handleEditorValidation}
       />
 
-      <QueryButtons handleClick={handleGenerate}></QueryButtons>
+      <QueryButtons handleClick={handleGenerate} containerWidth={"100%"} />
     </>
   );
 }

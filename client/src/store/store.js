@@ -4,34 +4,34 @@ import storage from "redux-persist/lib/storage";
 
 // Initial state
 const initialState = {
-	username: null,
-	authenticated: false,
-	loading: false,
-	codeOutput: {
-		code: "",
-		language: "c",
-	},
+  username: null,
+  authenticated: false,
+  loading: false,
+  codeOutput: {
+    code: "",
+    language: "c",
+  },
 };
 
 // Reducer function
 const reducer = (state = initialState, action) => {
-	switch (action.type) {
-		case "SET_USERNAME":
-			return { ...state, username: action.payload };
-		case "SET_AUTHENTICATED":
-			return { ...state, authenticated: action.payload };
-		case "SET_LOADING":
-			return { ...state, loading: action.payload };
-		case "DISPLAY_CODE_OUTPUT":
-			return { ...state, codeOutput: action.payload };
-		default:
-			return state;
-	}
+  switch (action.type) {
+    case "SET_USERNAME":
+      return { ...state, username: action.payload };
+    case "SET_AUTHENTICATED":
+      return { ...state, authenticated: action.payload };
+    case "SET_LOADING":
+      return { ...state, loading: action.payload };
+    case "DISPLAY_CODE_OUTPUT":
+      return { ...state, codeOutput: action.payload };
+    default:
+      return state;
+  }
 };
 
 const persistConfig = {
-	key: "root",
-	storage,
+  key: "root",
+  storage,
 };
 
 const persistedReducer = persistReducer(persistConfig, reducer);
