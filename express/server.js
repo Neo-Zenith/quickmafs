@@ -6,10 +6,14 @@ import http from "http";
 const server = http.createServer(app);
 import cors from "cors";
 import OpenAI from "openai";
-import fs from "fs";
 
 import dotenv from "dotenv";
 dotenv.config();
+
+import multer from "multer";
+
+const storage = multer.memoryStorage(); // You can adjust this based on your storage needs
+const upload = multer({ storage: storage });
 
 const io = new Server(server, {
   cors: {
@@ -261,19 +265,23 @@ const semidefinitePrompt = `
 `;
 
 // Image to expressions
-app.get("/image-to-expression", async (req, res) => {
-  const filename = "./img/upload.png";
-  const data = fs.readFileSync(filename);
+app.post("/image-to-expression", upload.single("file"), async (req, res) => {
+  // Access the buffer from the uploaded file
+  const imageBuffer = req.file.buffer;
+
+  // Use the buffer in the second request to the Hugging Face API
   const response = await fetch(
     "https://api-inference.huggingface.co/models/microsoft/trocr-small-printed",
     {
       headers: {
         Authorization: "Bearer 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",
+        "Content-Type": "image/png", // Set the appropriate content type based on your image format
       },
       method: "POST",
-      body: data,
+      body: imageBuffer,
     }
   );
+
   const result = await response.json();
   return res.json({ success: true, result });
 });

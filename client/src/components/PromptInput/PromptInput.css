@@ -1,5 +1,5 @@
 .prompt-input {
-	width: 85%;
+	width: 100%;
 	font-size: 0.875rem;
 	font-weight: 400;
 	line-height: 1.5;
@@ -9,6 +9,7 @@
 	background: var(--color-secondary);
 	border: 1px solid #000;
 	box-shadow: 0px 2px 4px "rgba(0,0,0,0.5)";
+	box-sizing: border-box;
 
 	&::placeholder {
 		color: var(--color-accent);

@@ -16,27 +16,22 @@ export default function PromptInput() {
   };
 
   const handleFileUpload = (e) => {
-    if (e.target.files.length === 0) {
+    const file = e.target.files[0];
+
+    // Check if a file is selected
+    if (!file) {
+      console.error("No file selected");
       return;
     }
 
-    const file = e.target.files[0];
-    const imgUrl = URL.createObjectURL(file);
-    const link = document.createElement("a");
-    link.href = imgUrl;
-    link.download = "upload.png";
-    link.style.display = "none";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    // Create a FormData object and append the file to it
+    const formData = new FormData();
+    formData.append("file", file);
 
-    const url = "http://localhost:5000/image-to-expression";
-    dispatch({ type: "SET_LOADING", payload: true });
-    fetch(url, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
+    // Perform the upload using fetch
+    fetch("http://localhost:5000/image-to-expression", {
+      method: "POST",
+      body: formData,
     })
       .then((response) => {
         if (!response.ok) {
@@ -113,10 +108,12 @@ export default function PromptInput() {
         width: "100%",
         height: "100%",
         paddingLeft: "1rem",
+        paddingRight: "1rem",
         justifyContent: "center",
+        boxSizing: "border-box",
       }}
     >
-      <Typography sx={{ fontSize: "3rem", fontWeight: 700 }}>
+      <Typography sx={{ fontSize: "1.5rem", fontWeight: 700 }}>
         Text Input
       </Typography>
 
@@ -133,7 +130,7 @@ export default function PromptInput() {
         <input type="file" hidden onChange={handleFileUpload} />
       </Button>
 
-      <QueryButtons handleClick={handleSubmit} containerWidth={"90%"} />
+      <QueryButtons handleClick={handleSubmit} containerWidth={"100%"} />
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import { Box, IconButton, Typography } from "@mui/material";
+import { Box, CircularProgress, IconButton, Typography } from "@mui/material";
 import CustomSnackbar from "../Snackbar/Snackbar";
 import { CodeBlock, vs2015 } from "react-code-blocks";
 import ContentPasteIcon from "@mui/icons-material/ContentPaste";
@@ -8,8 +8,10 @@ import { useState } from "react";
 import MenuDropdown from "../MenuDropdown/MenuDropdown";
 import SourceIcon from "@mui/icons-material/Source";
 import ArticleIcon from "@mui/icons-material/Article";
+import { useSelector } from "react-redux";
 
 export default function OutputWindow({ context }) {
+  const loading = useSelector((state) => state.loading);
   const [copied, setCopied] = useState(false);
 
   const copyToClipboard = () => {
@@ -76,7 +78,25 @@ export default function OutputWindow({ context }) {
           </IconButton>
         </div>
 
-        <div className="output-content">
+        <div className="output-content" style={{ position: "relative" }}>
+          {loading && (
+            <div
+              className="loader-div"
+              style={{
+                position: "absolute",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                margin: "auto",
+                width: "100%",
+                height: "47vh",
+                boxSizing: "border-box",
+                backgroundColor: "rgba(0, 0, 0, 0.7)",
+              }}
+            >
+              <CircularProgress />
+            </div>
+          )}
           <CodeBlock
             text={context.code}
             language={context.language}
