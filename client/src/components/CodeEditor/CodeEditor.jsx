@@ -1,8 +1,9 @@
 import { useRef, useState } from "react";
+import { useDispatch } from "react-redux";
 import Editor from "@monaco-editor/react";
-// import CodeEditorDropdown from "./Dropdown";
 import CodeEditorButton from "./Button";
 import MenuDropdown from "../MenuDropdown/MenuDropdown";
+import "./COdeEditor.css";
 
 const languageCommentsMap = new Map([
 	["javascript", "// Paste/Enter your code here"],
@@ -14,8 +15,9 @@ const languageCommentsMap = new Map([
 	// Add more languages as needed
 ]);
 
-const CodeEditor = ({ defaultCode }) => {
+export default function CodeEditor({ defaultCode }) {
 	const editorRef = useRef(null);
+	const dispatch = useDispatch();
 	const [language, setLanguage] = useState("Python");
 	const [code, setCode] = useState(defaultCode);
 
@@ -41,9 +43,19 @@ const CodeEditor = ({ defaultCode }) => {
 		return inputString;
 	}
 
+	function sanitizeInput(inputString) {
+		const cleanedString = removeWordFromStart(
+			inputString,
+			languageCommentsMap.get(language)
+		);
+		// Using the replace method with a regular expression to replace all occurrences
+		const sanitizedString = cleanedString.replace(/'/g, '"');
+		return sanitizedString;
+	}
+
 	// handle when user clicks on "Generate" button
 	function handleGenerate() {
-		let content = removeWordFromStart(code, languageCommentsMap.get(language));
+		let content = sanitizeInput(code);
 
 		const url = "http://localhost:5000/openai";
 		const payload = {
@@ -66,7 +78,14 @@ const CodeEditor = ({ defaultCode }) => {
 				return response.json(); // Parse the response body as JSON
 			})
 			.then((data) => {
-				console.log("Success:", data);
+				console.log("Query success:", data);
+				dispatch({
+					type: "DISPLAY_CODE_OUTPUT",
+					payload: {
+						code: data.response.code,
+						language: "c",
+					},
+				});
 			})
 			.catch((error) => {
 				console.error("Error:", error);
@@ -99,8 +118,9 @@ const CodeEditor = ({ defaultCode }) => {
 			</div>
 
 			<Editor
-				height="60vh"
+				height="65vh"
 				theme="vs-dark"
+				className="container"
 				language={language}
 				defaultLanguage="python"
 				defaultValue={defaultCode}
@@ -114,6 +134,4 @@ const CodeEditor = ({ defaultCode }) => {
 			<CodeEditorButton handleClick={handleGenerate} />
 		</>
 	);
-};
-
-export default CodeEditor;
+}

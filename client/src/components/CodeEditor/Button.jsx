@@ -14,6 +14,7 @@ export default function CodeEditorButton({ handleClick }) {
 					setLoading(true);
 					handleClick();
 				}}
+				disabled={loading}
 			>
 				Generate
 			</Button>

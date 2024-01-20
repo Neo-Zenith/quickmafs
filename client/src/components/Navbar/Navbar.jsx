@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -19,15 +19,14 @@ export default function Navbar() {
     const [anchorEl, setAnchorEl] = useState(null);
     const auth = useSelector((state) => state.authenticated);
     const navigate = useNavigate();
-    const dispatch = useDispatch();
 
-    const handleMenu = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
+	const handleMenu = (event) => {
+		setAnchorEl(event.currentTarget);
+	};
 
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
+	const handleClose = () => {
+		setAnchorEl(null);
+	};
 
     return (
         <AppBar
@@ -75,11 +74,6 @@ export default function Navbar() {
                             }}
                             open={Boolean(anchorEl)}
                             onClose={handleClose}
-                            sx={{
-                                "& .MuiPaper-root": {
-                                    backgroundColor: "var(--color-secondary)",
-                                },
-                            }}
                         >
                             <MenuItem onClick={handleClose}>
                                 <Typography
@@ -91,20 +85,14 @@ export default function Navbar() {
                                     Profile
                                 </Typography>
                             </MenuItem>
-                            <MenuItem
-                                onClick={() => {
-                                    handleClose();
-                                    dispatch(setAuthenticated(false));
-                                    navigate("/");
-                                }}
-                            >
+                            <MenuItem onClick={handleClose}>
                                 <Typography
                                     sx={{
                                         color: "var(--color-accent)",
                                         fontSize: "0.8rem",
                                     }}
                                 >
-                                    Logout
+                                    Profile
                                 </Typography>
                             </MenuItem>
                         </Menu>

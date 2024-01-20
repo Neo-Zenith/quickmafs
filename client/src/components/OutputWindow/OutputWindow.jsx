@@ -78,15 +78,17 @@ export default function OutputWindow({ context }) {
 
 				<div className="output-content">
 					<CodeBlock
-						// text={context.code}
-						text={"const a = 10; a++;"}
-						// language={context.language}
-						language={"javascript"}
-						showLineNumbes={context.showLineNumbers}
+						text={context.code}
+						language={context.language}
+						showLineNumbes={true}
 						theme={vs2015}
 						wrapLines
+						customStyle={{
+							maxHeight: "52vh",
+						}}
 					/>
 				</div>
+
 				<div className="output-further-actions">
 					<MenuDropdown
 						title={"Export As"}
