@@ -1,19 +1,19 @@
 .output-header {
-    display: flex;
-    width: 100%;
+	display: flex;
+	width: 100%;
 }
 
 .output-header-btn-content {
-    display: flex;
-    column-gap: 0.4rem;
+	display: flex;
+	column-gap: 0.4rem;
 }
 
 .output-content {
-    margin-top: 0.5rem;
+	margin-top: 0.5rem;
 }
 
 .output-further-actions {
-    width: fit-content;
-    margin-top: 0.5rem;
-    margin-left: auto;
+	width: fit-content;
+	margin-top: 0.5rem;
+	margin-left: auto;
 }

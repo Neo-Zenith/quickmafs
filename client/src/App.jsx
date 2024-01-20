@@ -1,4 +1,3 @@
-import OutputWindow from "./components/OutputWindow/OutputWindow";
 import CodeEditor from "./components/CodeEditor/CodeEditor";
 import { Grid } from "@mui/material";
 import Output from "./components/Output/Output";
@@ -6,7 +5,7 @@ import Output from "./components/Output/Output";
 function App() {
 	return (
 		<>
-			<h1>Monaco Editor Example</h1>
+			<h1 style={{ textAlign: "center" }}>Monaco Editor Example</h1>
 			<Grid container spacing={2}>
 				<Grid item xs={6}>
 					<CodeEditor defaultCode={"# Paste/Enter your code here"} />
