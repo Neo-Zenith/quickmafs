@@ -12,3 +12,8 @@ export const displayCodeOutput = (codeOutput) => ({
 	type: "DISPLAY_CODE_OUTPUT",
 	payload: codeOutput,
 });
+
+export const setLoading = (isLoading) => ({
+	type: "SET_LOADING",
+	payload: isLoading,
+});

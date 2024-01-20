@@ -1,17 +1,22 @@
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
-export default function CodeEditorButton({ handleClick }) {
-	const [loading, setLoading] = useState(false);
+export default function QueryButtons({ handleClick }) {
+	const loading = useSelector((state) => state.loading);
 
 	return (
-		<Stack justifyContent="space-between" direction="row" marginTop={2}>
+		<Stack
+			justifyContent="space-between"
+			direction="row"
+			width="100%"
+			marginTop={2}
+		>
 			<Button
 				variant="contained"
 				color="success"
 				onClick={() => {
-					setLoading(true);
 					handleClick();
 				}}
 				disabled={loading}
