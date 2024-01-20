@@ -3,7 +3,6 @@ import LandingPage from "./pages/LandingPage";
 import QueryPage from "./pages/QueryPage";
 import SignupPage from "./pages/SignupPage";
 import LoginPage from "./pages/LoginPage";
-import HistoryPage from "./pages/HistoryPage";
 
 function App() {
     return (
