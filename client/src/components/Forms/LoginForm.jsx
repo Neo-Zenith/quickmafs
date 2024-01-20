@@ -2,7 +2,7 @@ import { Box, Button, Typography } from "@mui/material";
 import CustomTextField from "../TextField/TextField";
 import { darken } from "@mui/material/styles";
 
-export default function SignupForm() {
+export default function LoginForm() {
     return (
         <>
             <Box
@@ -32,7 +32,7 @@ export default function SignupForm() {
                             color: "var(--color-accent)",
                         }}
                     >
-                        SIGN UP
+                        LOGIN
                     </Typography>
                     <Typography
                         variant="subtitle1"
@@ -43,12 +43,12 @@ export default function SignupForm() {
                             color: "var(--color-accent)",
                         }}
                     >
-                        Already have an account?&nbsp;&nbsp;
+                        Don't have an account?&nbsp;&nbsp;
                         <a
-                            href="/login"
+                            href="/signup"
                             style={{ color: "var(--color-tertiary)" }}
                         >
-                            Login now
+                            Signup now
                         </a>
                         .
                     </Typography>
@@ -61,12 +61,7 @@ export default function SignupForm() {
                     }}
                 >
                     <CustomTextField label={"Email address"} />
-                    <CustomTextField label={"Name"} />
                     <CustomTextField label={"Password"} type="password" />
-                    <CustomTextField
-                        label={"Confirm Password"}
-                        type="password"
-                    />
                 </Box>
                 <Box sx={{ marginLeft: "auto" }}>
                     <Button
@@ -87,7 +82,7 @@ export default function SignupForm() {
                                 fontSize: "1rem",
                             }}
                         >
-                            SIGN UP
+                            LOGIN
                         </Typography>
                     </Button>
                 </Box>

@@ -10,11 +10,13 @@ import Menu from "@mui/material/Menu";
 import { useSelector } from "react-redux";
 import Button from "@mui/material/Button";
 import { darken } from "@mui/material/styles";
+import { useNavigate } from "react-router-dom";
 import "./Navbar.css";
 
 export default function Navbar() {
     const [anchorEl, setAnchorEl] = useState(null);
     const auth = useSelector((state) => state.authenticated);
+    const navigate = useNavigate();
 
     const handleMenu = (event) => {
         setAnchorEl(event.currentTarget);
@@ -107,6 +109,9 @@ export default function Navbar() {
                                 },
                                 color: "var(--color-secondary)",
                             }}
+                            onClick={() => {
+                                navigate("/login");
+                            }}
                         >
                             <Typography
                                 sx={{
@@ -126,6 +131,9 @@ export default function Navbar() {
                                     backgroundColor: darken("#0C7489", 0.1), // Adjust the factor (0.1) as needed
                                 },
                                 color: "var(--color-secondary)",
+                            }}
+                            onClick={() => {
+                                navigate("/signup");
                             }}
                         >
                             <Typography
