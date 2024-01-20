@@ -174,7 +174,6 @@ app.post("/openai", async (req, res) => {
             } else {
                 printf("Optimization failed\n");
             }
-
             return 0;
         }
 
