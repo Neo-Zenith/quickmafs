@@ -1,0 +1,13 @@
+.output-header {
+    display: flex;
+    width: 100%;
+}
+
+.output-header-btn-content {
+    display: flex;
+    column-gap: 0.4rem;
+}
+
+.output-content {
+    margin-top: 0.5rem;
+}
