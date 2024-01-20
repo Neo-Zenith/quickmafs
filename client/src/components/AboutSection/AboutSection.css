@@ -1,0 +1,6 @@
+.about-cards {
+    display: flex;
+    column-gap: 3rem;
+    margin: 0 10rem;
+    margin-bottom: 1.5rem;
+}
