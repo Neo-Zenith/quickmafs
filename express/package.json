@@ -14,6 +14,7 @@
     "dotenv": "^16.3.2",
     "express": "^4.18.2",
     "nodemon": "^3.0.3",
+    "openai": "^4.24.7",
     "socket.io": "^4.7.4"
   },
   "description": ""
