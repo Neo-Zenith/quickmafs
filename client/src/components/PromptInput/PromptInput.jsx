@@ -13,9 +13,6 @@ export default function PromptInput() {
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
   };
-  const handleInputChange = (e) => {
-    setInputValue(e.target.value);
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -68,10 +65,9 @@ export default function PromptInput() {
     setInputValue("");
     setError("");
   };
-    // Reset the input value and error state
-    setInputValue("");
-    setError("");
-  };
+  // Reset the input value and error state
+  setInputValue("");
+  setError("");
 
   return (
     <div
