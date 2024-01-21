@@ -1,5 +1,7 @@
-# Hackathon: LLM-integrated Code Generator for Embedded Convex Optimization
+<img width="300" alt="Screenshot 2024-01-21 at 10 31 48" src="https://github.com/Neo-Zenith/ntu-fast-fingers/assets/77436548/1f38ad5b-3c8c-427c-a0a1-5f6d5bf530e5">
 
+# QuickMafs: LLM-integrated Code Generator for Embedded Convex Optimization
+![LandingPage](./img/landing-page.png)
 ## What is QuickMafs
 QuickMafs is a LLM-integrated code generator for embedded convex optimization, addressing the challenges engineers face in translating complex mathematical expressions with convex objectives into efficient C code for embedded devices. It ultimately facilitates applications ranging from aircraft flight control systems to autonomous vehicles, portfolio optimization, healthcare systems, and smart grids.
 ## Problem Overview:
@@ -29,10 +31,10 @@ QuickMafs is a LLM-integrated code generator for embedded convex optimization, a
 ## Code Generation Flow
 #### 1. Math Prompt
 ![MathPrompt](./img/text-input.png)
-Input your math prompt in plain English or supported programming languages.
+Input your math prompt in plain English expression or in the supported programming languages.
 #### 2. Generate
 ![CodeOutput](./img/code-output.png)
-Our system will process your input and return with the equivalent embedded system code of the language of your choice
+Our system will process your input and return with the equivalent embedded system code
 #### 3. Save Result
 ![ExportAs](./img/export-as.png)
 Immediately use the generated code by either copying the code directly to clipboard or saving as file.

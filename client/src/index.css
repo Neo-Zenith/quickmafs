@@ -22,4 +22,31 @@ body {
   background-color: var(--color-primary);
   color: var(--color-accent);
   margin: 0;
+  overflow-x: hidden;
+}
+
+/* Track */
+::-webkit-scrollbar {
+  width: 12px; /* Set the width of the scrollbar */
+  height: 8px;
+}
+
+/* Handle or Thumb */
+::-webkit-scrollbar-thumb {
+  background-color: var(
+    --color-accent
+  ); /* Set the color of the scrollbar thumb */
+  border-radius: 10px; /* Set the border radius of the scrollbar thumb */
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background-color: var(
+    --color-secondary
+  ); /* Set the color of the scrollbar track */
+}
+
+/* Corner */
+::-webkit-scrollbar-corner {
+  background-color: #f1f1f1; /* Set the color of the scrollbar corner */
 }
