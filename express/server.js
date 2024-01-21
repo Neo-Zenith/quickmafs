@@ -71,7 +71,7 @@ const get_family_schema = {
     family: {
       type: "string",
       description:
-        "either Linear Programming, Quadratic Programming and Semidefinite Programming",
+        "Family of the problem that is most likely to. Must be one of 'Linear Programming', 'Quadratic Programming' or 'Semidefinite Programming'",
     },
   },
   required: ["family"],
@@ -104,7 +104,7 @@ const get_family = async (content) => {
         Minimize: Tr(C⋅X)
         Subject to: Tr(Ai⋅X)=bi, i=1,...,m and X⪰0
   
-        Output your answer in either Linear Programming, Quadratic Programming and Semidefinite Programming
+        Output your answer in either 'Linear Programming', 'Quadratic Programming' or 'Semidefinite Programming'
         `,
       },
       {
