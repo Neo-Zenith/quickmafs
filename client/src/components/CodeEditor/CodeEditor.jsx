@@ -227,20 +227,9 @@ export default function CodeEditor({ defaultLanguage }) {
     markers.forEach((marker) => console.log("onValidate:", marker.message));
   }
 
-  function removeWordFromStart(inputString, targetWord) {
-    if (inputString.startsWith(targetWord)) {
-      return inputString.slice(targetWord.length).trim();
-    }
-    return inputString;
-  }
-
   function sanitizeInput(inputString) {
-    const cleanedString = removeWordFromStart(
-      inputString,
-      languageCommentsMap.get(language)
-    );
     // Using the replace method with a regular expression to replace all occurrences
-    const sanitizedString = cleanedString.replace(/'/g, '"');
+    const sanitizedString = inputString.replace(/'/g, '"');
     return sanitizedString;
   }
 

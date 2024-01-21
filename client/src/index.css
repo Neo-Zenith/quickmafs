@@ -28,7 +28,7 @@ body {
 /* Track */
 ::-webkit-scrollbar {
   width: 12px; /* Set the width of the scrollbar */
-  height: 12px;
+  height: 8px;
 }
 
 /* Handle or Thumb */
