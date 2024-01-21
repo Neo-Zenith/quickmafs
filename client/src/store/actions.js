@@ -17,3 +17,8 @@ export const setLoading = (isLoading) => ({
   type: "SET_LOADING",
   payload: isLoading,
 });
+
+export const setUserDb = (userDb) => ({
+  type: "SET_USER_DB",
+  payload: userDb,
+});

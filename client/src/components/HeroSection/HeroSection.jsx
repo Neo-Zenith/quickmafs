@@ -77,7 +77,8 @@ export default function HeroSection() {
             "&:hover": {
               backgroundColor: darken("#0C7489", 0.1), // Adjust the factor (0.1) as needed
             },
-            maxWidth: "max(50%, 20rem)",
+            padding: "0.5rem 1.5rem",
+            width: "fit-content",
           }}
         >
           <Typography>Try Now</Typography>

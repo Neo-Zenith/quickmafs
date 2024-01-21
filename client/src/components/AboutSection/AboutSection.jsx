@@ -7,12 +7,12 @@ export default function AboutSection() {
     {
       title: "1. Math Prompt",
       content:
-        "Input your math prompt in plain English or supported programming languages.",
+        "Input your math prompt in plain English expression or in the supported programming languages.",
     },
     {
       title: "2. Generate",
       content:
-        "Our system will process your input and return with the equivalent embedded system code of the language of your choice.",
+        "Our system will process your input and return with the equivalent embedded system code.",
     },
     {
       title: "3. Save Result",

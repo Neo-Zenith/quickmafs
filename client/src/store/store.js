@@ -11,6 +11,7 @@ const initialState = {
     code: "",
     language: "c",
   },
+  userDb: {},
 };
 
 // Reducer function
@@ -24,6 +25,9 @@ const reducer = (state = initialState, action) => {
       return { ...state, loading: action.payload };
     case "DISPLAY_CODE_OUTPUT":
       return { ...state, codeOutput: action.payload };
+    case "SET_USER_DB": {
+      return { ...state, userDb: action.payload };
+    }
     default:
       return state;
   }
