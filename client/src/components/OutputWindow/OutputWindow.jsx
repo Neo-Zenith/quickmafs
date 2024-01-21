@@ -104,7 +104,7 @@ export default function OutputWindow({ context }) {
             theme={vs2015}
             wrapLines
             customStyle={{
-              maxHeight: "47vh",
+              height: "47vh",
             }}
           />
         </div>
