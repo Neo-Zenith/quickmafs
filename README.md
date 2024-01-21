@@ -27,6 +27,8 @@ QuickMafs is a LLM-integrated code generator for embedded convex optimization, a
 - Large Language Model with Prompt Engineering    
 - Export generated code as .c or .txt    
 
+## System Architecture
+![System](https://i.ibb.co/2qVfFQK/Whats-App-Image-2024-01-21-at-11-24-48-AM.jpg)   
 
 ## Code Generation Flow
 #### 1. Math Prompt
