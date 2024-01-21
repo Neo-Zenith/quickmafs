@@ -2,11 +2,23 @@ import { Box, Button, Typography } from "@mui/material";
 import { darken } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import herosection from "../../static/herosection.gif";
+import herosection from "../../static/herosection.mp4";
+import { useRef } from "react";
 
 export default function HeroSection() {
   const navigate = useNavigate();
   const auth = useSelector((state) => state.authenticated);
+  const videoRef = useRef(null);
+
+  const handleVideoEnded = () => {
+    // Restart the video when it ends
+    console.log(videoRef.current);
+    if (videoRef.current) {
+      videoRef.current.currentTime = 0;
+      videoRef.current.play();
+    }
+  };
+
   return (
     <div style={{ display: "flex" }}>
       <Box
@@ -84,10 +96,17 @@ export default function HeroSection() {
             boxShadow: "0px 0px 13px 3px rgba(17,157,164,0.71)",
           }}
         >
-          <img
-            src={herosection}
-            style={{ width: "100%", height: "fit-content" }}
-          />
+          <video
+            ref={videoRef}
+            width="100%"
+            height="100%"
+            loop
+            autoPlay
+            controls={false}
+          >
+            <source src={herosection} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
         </Box>
       </div>
     </div>
