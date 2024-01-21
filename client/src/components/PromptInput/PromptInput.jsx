@@ -125,7 +125,11 @@ export default function PromptInput() {
         placeholder="Enter your prompt here…"
       />
 
-      <Button variant="contained" component="label">
+      <Button
+        variant="contained"
+        component="label"
+        style={{ marginTop: "0.5rem" }}
+      >
         Upload Image
         <input type="file" hidden onChange={handleFileUpload} />
       </Button>

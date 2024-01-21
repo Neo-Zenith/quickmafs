@@ -274,7 +274,7 @@ app.post("/image-to-expression", upload.single("file"), async (req, res) => {
     "https://api-inference.huggingface.co/models/microsoft/trocr-small-printed",
     {
       headers: {
-        Authorization: "Bearer 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",
+        Authorization: process.env.HUGGING_FACE_TOKEN,
         "Content-Type": "image/png", // Set the appropriate content type based on your image format
       },
       method: "POST",
@@ -299,7 +299,7 @@ const schema = {
 
 // openai
 const openai = new OpenAI({
-  apiKey: "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",
+  apiKey: process.env.OPENAPI_KEY,
 });
 
 app.post("/openai", async (req, res) => {

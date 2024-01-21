@@ -15,7 +15,7 @@ export default function QueryPage() {
   return (
     <>
       <Navbar />
-      <div style={{ marginTop: "6rem" }}>
+      <div style={{ marginTop: "5rem" }}>
         <div style={{ textAlign: "center" }}>
           <Button variant="contained" color="info" onClick={toggleEditor}>
             Toggle Editor
