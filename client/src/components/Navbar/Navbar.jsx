@@ -56,10 +56,10 @@ export default function Navbar() {
         <Typography
           variant="h6"
           component="div"
-          sx={{ flexGrow: 1, cursor: "pointer" }}
+          sx={{ flexGrow: 1, cursor: "pointer", color: "var(--color-accent)" }}
           onClick={() => navigate("/")}
         >
-          APP NAME
+          QUICK MAFS
         </Typography>
         {auth && (
           <div className="navbar-actions">
@@ -93,21 +93,6 @@ export default function Navbar() {
                 },
               }}
             >
-              <MenuItem
-                onClick={() => {
-                  handleClose();
-                  navigate("/profile");
-                }}
-              >
-                <Typography
-                  sx={{
-                    color: "var(--color-accent)",
-                    fontSize: "0.8rem",
-                  }}
-                >
-                  Profile
-                </Typography>
-              </MenuItem>
               <MenuItem
                 onClick={() => {
                   handleClose();
