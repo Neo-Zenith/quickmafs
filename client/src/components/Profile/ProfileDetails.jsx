@@ -16,7 +16,12 @@ export default function ProfileDetails() {
           Profile Information
         </Typography>
         <div
-          style={{ display: "flex", flexDirection: "column", rowGap: "1.5rem" }}
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            rowGap: "1.5rem",
+            marginTop: "1.5rem",
+          }}
         >
           <CustomTextField label={"Name"} disabled={!updatable} />
           <CustomTextField label={"Email"} disabled={!updatable} />

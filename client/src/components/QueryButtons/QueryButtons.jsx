@@ -11,7 +11,7 @@ export default function QueryButtons({ handleClick }) {
       width="100%"
       justifyContent="space-between"
       direction="row"
-      marginTop={2}
+      marginTop={1.5}
     >
       <Button
         variant="contained"

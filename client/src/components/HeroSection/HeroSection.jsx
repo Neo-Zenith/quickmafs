@@ -7,6 +7,7 @@ import herosection from "../../static/herosection.gif";
 export default function HeroSection() {
   const navigate = useNavigate();
   const auth = useSelector((state) => state.authenticated);
+
   return (
     <div style={{ display: "flex" }}>
       <Box

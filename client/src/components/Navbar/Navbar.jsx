@@ -59,8 +59,9 @@ export default function Navbar() {
           sx={{ flexGrow: 1, cursor: "pointer" }}
           onClick={() => navigate("/")}
         >
-          APP NAME
+          QuickMafs
         </Typography>
+
         {auth && (
           <div className="navbar-actions">
             <IconButton
@@ -73,6 +74,7 @@ export default function Navbar() {
             >
               <AccountCircle />
             </IconButton>
+
             <Menu
               id="menu-appbar"
               anchorEl={anchorEl}
@@ -91,6 +93,10 @@ export default function Navbar() {
                 "& .MuiPaper-root": {
                   backgroundColor: "var(--color-secondary)",
                 },
+              }}
+              style={{
+                marginRight: "0.85rem",
+                marginTop: "2.35rem",
               }}
             >
               <MenuItem
