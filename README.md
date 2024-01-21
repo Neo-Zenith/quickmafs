@@ -29,10 +29,10 @@ QuickMafs is a LLM-integrated code generator for embedded convex optimization, a
 ## Code Generation Flow
 #### 1. Math Prompt
 ![MathPrompt](./img/text-input.png)
-Input your math prompt in plain English or supported programming languages.
+Input your math prompt in plain English expression or in the supported programming languages.
 #### 2. Generate
 ![CodeOutput](./img/code-output.png)
-Our system will process your input and return with the equivalent embedded system code of the language of your choice
+Our system will process your input and return with the equivalent embedded system code
 #### 3. Save Result
 ![ExportAs](./img/export-as.png)
 Immediately use the generated code by either copying the code directly to clipboard or saving as file.
