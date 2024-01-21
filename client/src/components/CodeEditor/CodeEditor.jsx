@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import Editor from "@monaco-editor/react";
 import MenuDropdown from "../MenuDropdown/MenuDropdown";
-import "./COdeEditor.css";
+import "./CodeEditor.css";
 import QueryButtons from "../QueryButtons/QueryButtons";
 import { Typography } from "@mui/material";
 
