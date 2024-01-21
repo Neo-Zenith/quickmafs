@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import "./Navbar.css";
 import { setAuthenticated } from "../../store/actions";
+import logo from "../../static/logo.png";
 
 export default function Navbar() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -59,7 +60,14 @@ export default function Navbar() {
           sx={{ flexGrow: 1, cursor: "pointer", color: "var(--color-accent)" }}
           onClick={() => navigate("/")}
         >
-          QuickMafs
+          <img
+            src={logo}
+            style={{
+              width: "10rem",
+              marginTop: "0.5rem",
+              marginLeft: "0.5rem",
+            }}
+          />
         </Typography>
 
         {auth && (
