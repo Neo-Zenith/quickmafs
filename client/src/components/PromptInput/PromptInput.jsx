@@ -7,7 +7,10 @@ import { useDispatch } from "react-redux";
 import "./PromptInput.css";
 
 export default function PromptInput() {
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] =
+    useState(`# This is an example of Convex Optimization Problem
+  f = 1/2x^2 + 2xy +3y^2 + x + y + x^2
+  constraint = {'x+y >= 10', '2x-y<=5'}`);
   const [error, setError] = useState("");
   const dispatch = useDispatch();
 
@@ -121,8 +124,14 @@ export default function PromptInput() {
         value={inputValue}
         error={error}
         onChange={handleInputChange}
+        maxRows={7}
+        rows={3}
+        required
+        multiline
         slotProps={{ input: { className: "prompt-input" } }}
-        placeholder="Enter your prompt here…"
+        placeholder="# This is an example of Convex Optimization Problem
+f = 1/2x^2 + 2xy +3y^2 + x + y + x^2
+constraint = {'x+y >= 10', '2x-y<=5'}"
       />
 
       <Button

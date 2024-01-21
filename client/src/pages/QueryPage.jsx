@@ -26,7 +26,7 @@ export default function QueryPage() {
           <Grid container spacing={2}>
             <Grid item xs={showCodeEditor ? 6 : 5}>
               {showCodeEditor ? (
-                <CodeEditor defaultCode={"# Paste/Enter your code here"} />
+                <CodeEditor defaultLanguage={"python"} />
               ) : (
                 <PromptInput />
               )}
