@@ -1,5 +1,5 @@
 # Hackathon: LLM-integrated Code Generator for Embedded Convex Optimization
-
+![LandingPage](./img/landing-page.png)
 ## What is QuickMafs
 QuickMafs is a LLM-integrated code generator for embedded convex optimization, addressing the challenges engineers face in translating complex mathematical expressions with convex objectives into efficient C code for embedded devices. It ultimately facilitates applications ranging from aircraft flight control systems to autonomous vehicles, portfolio optimization, healthcare systems, and smart grids.
 ## Problem Overview:
