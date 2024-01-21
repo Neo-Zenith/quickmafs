@@ -32,7 +32,7 @@ export default function PromptInput() {
     formData.append("file", file);
 
     // Perform the upload using fetch
-    fetch("http://localhost:5000/image-to-expression", {
+    fetch("http://127.0.0.1:5000/image-to-expression", {
       method: "POST",
       body: formData,
     })

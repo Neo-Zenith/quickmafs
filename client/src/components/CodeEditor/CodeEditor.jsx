@@ -237,7 +237,7 @@ export default function CodeEditor({ defaultLanguage }) {
   function handleGenerate() {
     let content = sanitizeInput(code);
 
-    const url = "http://localhost:5000/openai";
+    const url = "http://127.0.0.1:5000/openai";
     const payload = {
       language: language,
       content: content,
